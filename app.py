@@ -41,7 +41,7 @@ app.register_blueprint(eventparticpation_bp)
 app.register_blueprint(event_bp)
 
 try:
-    with open('Flask/secret_key.txt', 'r') as file:
+    with open('app/secret_key.txt', 'r') as file:
         app.secret_key = file.read().strip()
     print("Secret Key set to:", app.secret_key)
 except Exception as e:
@@ -64,7 +64,7 @@ def create_db_from_sql(sql_file_path):
     # データベースの存在をチェックし、存在しない場合にのみ初期化
 db_path = 'testDB.db'
 if not os.path.exists(db_path):
-    create_db_from_sql('Flask/sql/init.sql')
+    create_db_from_sql('app/sql/init.sql')
 
 @app.route("/")
 def show_urls():
