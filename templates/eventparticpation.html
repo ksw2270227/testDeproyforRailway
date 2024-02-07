@@ -86,6 +86,8 @@
             min-height: calc(100vh - 165px);
             margin: 0;
         }
+    
+        
 
     .backButton {
       display: inline-block;
@@ -105,13 +107,7 @@
     }
 
 
-    /* フラッシュメッセージのためのCSSスタイル */
-    .flash-messages {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-        }
+
   </style>
 </head>
 
@@ -121,6 +117,18 @@
   <!-- <a href="" onclick="goBack()" class="backButton">戻る</a> -->
 
   <button onclick="goBack()" class="backButton">戻る</button>
+
+  {% if errorid == 1 %}
+  <style>
+    main {
+      min-height: calc(100vh - 257px);
+    }
+  </style>
+        <!-- イベントがない場合 -->
+        <div style="color: red; text-align: center; padding: 20px;">
+            エラー: そのイベントは存在しません。</br>再度入力しなおしてください。
+        </div>
+  {% endif %}
 
   <main>
   <form action="/event" method="post" name="joinevent">

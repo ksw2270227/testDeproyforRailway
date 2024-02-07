@@ -143,7 +143,9 @@
     </div>
     
     <input type="submit" value="作成" class="createButton" onclick="submitForm()">
-    
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
   </form>
   <div id="footer"></div>
 

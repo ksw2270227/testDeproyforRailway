@@ -120,6 +120,18 @@
     width: 60%; /* 入力フィールドの幅を調整 */
   }
 
+  /* 年と月のlabel要素のスタイル */
+label[for="yearInput"],
+label[for="monthInput"] 
+label[for="dayInput"]{
+  display: inline-block;
+  width: auto; /* ラベルの幅を自動に設定 */
+  text-align: left; /* ラベルを左寄せ */
+  margin-right: 0; /* スペースをなくす */
+  box-sizing: border-box; /* paddingを含めた全体の幅にする */
+}
+
+
   </style>
 </head>
 
@@ -155,6 +167,31 @@
   
     <label for="ageInput">年齢</label>
     <input type="number" id="ageInput" name="age" required pattern="[0-9]*" maxlength="3">
+    <!-- <label for="yearInput">年</label> -->
+    <!-- <label for="birthDate">生年月日</label>
+    <select id="yearInput" name="year" onchange="updateDays()" required></select>
+    <label for="yearInput">年</label> -->
+    
+    <!-- <label for="monthInput">月</label> -->
+    <!-- <select id="monthInput" name="month" onchange="updateDays()" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+    <label for="monthInput">月</label>
+    
+    <label for="dayInput">日</label>
+    <select id="dayInput" name="day" required></select>
+    <label for="dayInput">日</label> -->
 
     <label>性別</label>
     <input type="radio" id="maleRadio" name="gender" value="男性"checked>
@@ -196,6 +233,39 @@ document.getElementById('phoneInput').addEventListener('input', function (e) {
     e.target.value = inputValue;
 });
 
+ const currentYear = new Date().getFullYear();
+  const yearInput = document.getElementById('yearInput');
+
+  for (let year = currentYear; year >= currentYear - 100; year--) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    yearInput.appendChild(option);
+  }
+
+  function updateDays() {
+    const yearInput = document.getElementById('yearInput');
+    const monthInput = document.getElementById('monthInput');
+    const dayInput = document.getElementById('dayInput');
+
+    const selectedYear = parseInt(yearInput.value, 10);
+    const selectedMonth = parseInt(monthInput.value, 10);
+    const maxDays = new Date(selectedYear, selectedMonth, 0).getDate();
+
+    // 日のプルダウンメニューをクリア
+    dayInput.innerHTML = '';
+
+    // 日のオプションを生成
+    for (let day = 1; day <= maxDays; day++) {
+      const option = document.createElement('option');
+      option.value = day;
+      option.textContent = day;
+      dayInput.appendChild(option);
+    }
+  }
+
+  // 最初に初期化するために呼び出す
+  updateDays();
 
 
   </script>
